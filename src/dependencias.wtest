@@ -1,0 +1,83 @@
+import dependencias.*
+import rodados.*
+
+
+describe "test de dependencias"{
+	
+	test "deportes y culturas"{
+		var cachito = new Corsa()
+		cachito.color("rojo")
+	
+	//rodados de deportes
+		var corsaAzul = new Corsa()
+		corsaAzul.color("azul")
+		
+		var corsaVerde = new Corsa()
+		corsaVerde.color("verde")
+		
+		var kwid1 = new Kwid()
+		kwid1.tanqueAdicional(true)
+		
+		var especial1 = new AutoEspecial()
+		especial1.capacidad(5)
+		especial1.velocidadMaxima(160)
+		especial1.peso(1200)
+		especial1.color("beige")
+		
+	//rodados de culturas
+		var kwid2 = new Kwid()
+		kwid2.tanqueAdicional(true)
+		
+		var kwid3 = new Kwid()
+		kwid3.tanqueAdicional(true)
+		
+		var kwid4 = new Kwid()
+		kwid4.tanqueAdicional(false)
+		
+	//dependencias
+		var deportes = new Dependencia()
+		deportes.empleados(40)
+		deportes.agregarAFlota(cachito) //4
+		deportes.agregarAFlota(corsaAzul)//4
+		deportes.agregarAFlota(corsaVerde)//4
+		deportes.agregarAFlota(kwid1)//3
+		deportes.agregarAFlota(especial1)//5
+		assert.equals(6450, deportes.pesoTotalFlota())
+		assert.equals(true, deportes.estaBienEquipada())
+//		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+		assert.equals("beige", deportes.colorDelRodadoMasRapido())
+		assert.equals(true, deportes.esGrande())
+		assert.equals(20, deportes.capacidadFaltante())
+		
+		
+		
+		var culturas = new Dependencia()
+		culturas.empleados(31)
+		culturas.agregarAFlota(cachito)
+		culturas.agregarAFlota(kwid2)
+		culturas.agregarAFlota(kwid3)
+		culturas.agregarAFlota(kwid4)
+		culturas.agregarAFlota(trafic)
+		trafic.interior(popular)
+		trafic.motor(baraton)
+		assert.equals(10700, culturas.pesoTotalFlota())
+		assert.equals(false, culturas.estaBienEquipada())
+//		assert.equals(10, culturas.capacidadTotalEnColor("azul"))
+		assert.equals("rojo", culturas.colorDelRodadoMasRapido())
+		assert.equals(false, culturas.esGrande())
+//		assert.equals(5, culturas.capacidadFaltante())
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
