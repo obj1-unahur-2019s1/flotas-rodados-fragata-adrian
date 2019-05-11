@@ -14,6 +14,6 @@ class Dependencia{
 	method colorDelRodadoMasRapido() { 
 		return flota.max({rodado => rodado.velocidadMaxima()}).color()
 	}
-	method capacidadFaltante(){ return flota.sum({rodado => rodado.capacidad()}) - empleados }
+	method capacidadFaltante(){ return empleados - flota.sum({rodado => rodado.capacidad()}) }
 	method esGrande(){ return empleados >= 40 and flota.size() >= 5 }
 }

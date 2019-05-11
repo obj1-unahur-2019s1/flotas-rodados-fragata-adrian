@@ -13,7 +13,7 @@ class Kwid {
 	method capacidad() { return if(tanqueAdicional){ return 3 } else{ return 4 } }
 	method velocidadMaxima() { return if(tanqueAdicional){ return 120 } else{ return 110 } }
 	method peso() { return if(tanqueAdicional) { return 1350 } else{ return 1200 } }
-	method color() { return "Azul" }
+	method color() { return "azul" }
 }
 
 object trafic {

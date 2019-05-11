@@ -44,7 +44,7 @@ describe "test de dependencias"{
 		deportes.agregarAFlota(especial1)//5
 		assert.equals(6450, deportes.pesoTotalFlota())
 		assert.equals(true, deportes.estaBienEquipada())
-//		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
 		assert.equals("beige", deportes.colorDelRodadoMasRapido())
 		assert.equals(true, deportes.esGrande())
 		assert.equals(20, deportes.capacidadFaltante())
@@ -62,10 +62,10 @@ describe "test de dependencias"{
 		trafic.motor(baraton)
 		assert.equals(10700, culturas.pesoTotalFlota())
 		assert.equals(false, culturas.estaBienEquipada())
-//		assert.equals(10, culturas.capacidadTotalEnColor("azul"))
+		assert.equals(10, culturas.capacidadTotalEnColor("azul"))
 		assert.equals("rojo", culturas.colorDelRodadoMasRapido())
 		assert.equals(false, culturas.esGrande())
-//		assert.equals(5, culturas.capacidadFaltante())
+		assert.equals(5, culturas.capacidadFaltante())
 	}
 	
 }
