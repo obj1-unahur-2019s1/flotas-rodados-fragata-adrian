@@ -3,6 +3,10 @@ import rodados.*
 class Dependencia{
 	var property empleados = 0
 	const property flota = [ ]
+	var property registroPedidos = [ ]
+	
+	method agregarPedido(pedido) { registroPedidos.add(pedido) }
+	method quitarPedido(pedido) { registroPedidos.remove(pedido) }
 	
 	method agregarAFlota(rodado) { flota.add(rodado) }
 	method quitarDeFlota(rodado) { flota.remove(rodado) }
@@ -16,4 +20,16 @@ class Dependencia{
 	}
 	method capacidadFaltante(){ return empleados - flota.sum({rodado => rodado.capacidad()}) }
 	method esGrande(){ return empleados >= 40 and flota.size() >= 5 }
+	
+	method totalPasajeros() { return registroPedidos.sum({pedido => pedido.pasajeros() }) }
+	method noPuedeSatisfacerse(){ 
+		return flota.filter({rodado => self.puedeSatisfacer(rodado) })
+	}
+	method puedeSatisfacer(rodado){
+		return registroPedidos.forEach({ pedido => pedido.puedeSatisfacer(rodado) })
+	}
+	method colorImcompatible(color) { 
+		return registroPedidos.all({registro => registro.coloresIncompatibles().contains(color) })
+	}
+	method relajarPedidos() { registroPedidos.forEach({ pedido => pedido.relajar() }) }
 }

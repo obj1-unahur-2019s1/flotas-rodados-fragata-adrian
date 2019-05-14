@@ -1,16 +1,15 @@
 import dependencias.*
 import rodados.*
-
+import pedidos.*
 
 describe "test de dependencias"{
 	
-	test "deportes y culturas"{
-		var cachito = new Corsa()
-		cachito.color("rojo")
+	var cachito = new Corsa(color = "rojo")
+
 	
-	//rodados de deportes
-		var corsaAzul = new Corsa()
-		corsaAzul.color("azul")
+	test "dependencia deportes "{
+	
+		var corsaAzul = new Corsa(color = "azul")
 		
 		var corsaVerde = new Corsa()
 		corsaVerde.color("verde")
@@ -24,7 +23,23 @@ describe "test de dependencias"{
 		especial1.peso(1200)
 		especial1.color("beige")
 		
-	//rodados de culturas
+		var deportes = new Dependencia(empleados = 40)
+		deportes.agregarAFlota(cachito) //4
+		deportes.agregarAFlota(corsaAzul)//4
+		deportes.agregarAFlota(corsaVerde)//4
+		deportes.agregarAFlota(kwid1)//3
+		deportes.agregarAFlota(especial1)//5
+		
+		assert.equals(6450, deportes.pesoTotalFlota())
+		assert.equals(true, deportes.estaBienEquipada())
+		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+		assert.equals("beige", deportes.colorDelRodadoMasRapido())
+		assert.equals(true, deportes.esGrande())
+		assert.equals(20, deportes.capacidadFaltante())
+	}
+	
+	test "dependencia culturas"{
+		
 		var kwid2 = new Kwid()
 		kwid2.tanqueAdicional(true)
 		
@@ -33,22 +48,6 @@ describe "test de dependencias"{
 		
 		var kwid4 = new Kwid()
 		kwid4.tanqueAdicional(false)
-		
-	//dependencias
-		var deportes = new Dependencia()
-		deportes.empleados(40)
-		deportes.agregarAFlota(cachito) //4
-		deportes.agregarAFlota(corsaAzul)//4
-		deportes.agregarAFlota(corsaVerde)//4
-		deportes.agregarAFlota(kwid1)//3
-		deportes.agregarAFlota(especial1)//5
-		assert.equals(6450, deportes.pesoTotalFlota())
-		assert.equals(true, deportes.estaBienEquipada())
-		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
-		assert.equals("beige", deportes.colorDelRodadoMasRapido())
-		assert.equals(true, deportes.esGrande())
-		assert.equals(20, deportes.capacidadFaltante())
-		
 		
 		
 		var culturas = new Dependencia()
@@ -60,12 +59,35 @@ describe "test de dependencias"{
 		culturas.agregarAFlota(trafic)
 		trafic.interior(popular)
 		trafic.motor(baraton)
+		
 		assert.equals(10700, culturas.pesoTotalFlota())
 		assert.equals(false, culturas.estaBienEquipada())
 		assert.equals(10, culturas.capacidadTotalEnColor("azul"))
 		assert.equals("rojo", culturas.colorDelRodadoMasRapido())
 		assert.equals(false, culturas.esGrande())
 		assert.equals(5, culturas.capacidadFaltante())
+		
+		//pedidos
+		
+		const viaje1 = new Pedido(
+			distancia = 960, 
+			tiempoMaximo = 8, 
+			pasajeros = 4, 
+			coloresIncompatibles = #{"negro", "azul", "blanco"})
+		
+		const viaje2 = new Pedido(
+			distancia = 960, 
+			tiempoMaximo = 8, 
+			pasajeros = 4, 
+			coloresIncompatibles = #{"negro", "azul", "rojo"})
+			
+		culturas.agregarPedido(viaje1)
+		culturas.agregarPedido(viaje2)
+		
+		assert.equals(8, culturas.totalPasajeros())
+		assert.equals([viaje1] , culturas.noPuedeSatisfacerse())
+		
+		
 	}
 	
 }

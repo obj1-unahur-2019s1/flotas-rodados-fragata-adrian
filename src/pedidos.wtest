@@ -1,0 +1,55 @@
+import pedidos.*
+import rodados.*
+
+
+describe "test de pedidos"{
+	
+	var cachito = new Corsa(color = "rojo")
+	
+	test "pedido1"{
+		
+		const viaje1 = new Pedido(
+			distancia = 960, 
+			tiempoMaximo = 8, 
+			pasajeros = 4, 
+			coloresIncompatibles = #{"negro", "azul"})
+			
+			assert.equals(120, viaje1.velocidadRequerida())
+			assert.equals(true, viaje1.puedeSatisfacer(cachito))
+			
+			viaje1.acelerar()
+			assert.equals(7, viaje1.tiempoMaximo())
+			
+			viaje1.relajar()
+			viaje1.relajar()
+			assert.equals(9, viaje1.tiempoMaximo())
+	}
+	
+	test "pedido2"{
+		
+		//se agrega rojo a los colores incompatibles
+		
+		const viaje2 = new Pedido(
+			distancia = 960, 
+			tiempoMaximo = 8, 
+			pasajeros = 4, 
+			coloresIncompatibles = #{"negro", "azul", "rojo"})
+			
+			assert.equals(120, viaje2.velocidadRequerida())
+			assert.equals(false, viaje2.puedeSatisfacer(cachito))
+	}
+	
+	test "pedido3"{
+		
+		//se cambio el tiempoMAximo = 6, la velocidadMaxima ahora es 160
+		
+		const viaje3 = new Pedido(
+			distancia = 960, 
+			tiempoMaximo = 6, 
+			pasajeros = 4, 
+			coloresIncompatibles = #{"negro", "azul"})
+			
+			assert.equals(160, viaje3.velocidadRequerida())
+			assert.equals(false, viaje3.puedeSatisfacer(cachito))
+	}
+}
