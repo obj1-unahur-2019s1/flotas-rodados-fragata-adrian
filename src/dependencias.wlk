@@ -21,15 +21,20 @@ class Dependencia{
 	method capacidadFaltante(){ return empleados - flota.sum({rodado => rodado.capacidad()}) }
 	method esGrande(){ return empleados >= 40 and flota.size() >= 5 }
 	
+	
+	
 	method totalPasajeros() { return registroPedidos.sum({pedido => pedido.pasajeros() }) }
-	method noPuedeSatisfacerse(){ 
-		return flota.filter({rodado => self.puedeSatisfacer(rodado) })
+	
+	method pedidosInaceptables(){ 
+		return registroPedidos.filter({pedido => not self.puedeSatisfacerPedido(pedido)  })
 	}
-	method puedeSatisfacer(rodado){
-		return registroPedidos.forEach({ pedido => pedido.puedeSatisfacer(rodado) })
+	
+	method puedeSatisfacerPedido(pedido){
+		return flota.any({rodado => pedido.puedeSatisfacer(rodado)})
 	}
+	
 	method colorImcompatible(color) { 
-		return registroPedidos.all({registro => registro.coloresIncompatibles().contains(color) })
+		return registroPedidos.all({pedido => pedido .coloresIncompatibles().contains(color) })
 	}
 	method relajarPedidos() { registroPedidos.forEach({ pedido => pedido.relajar() }) }
 }

@@ -85,7 +85,7 @@ describe "test de dependencias"{
 		culturas.agregarPedido(viaje2)
 		
 		assert.equals(8, culturas.totalPasajeros())
-		assert.equals([viaje1] , culturas.noPuedeSatisfacerse())
+		assert.equals([viaje1] , culturas.pedidosInaceptables())
 		
 		
 	}
